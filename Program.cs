@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
+using System.Windows; //because of Clipboard (Windows.PresentationCore)
 
 
 namespace ProjectEulerCsharp
@@ -12,11 +12,15 @@ namespace ProjectEulerCsharp
         [STAThread] 
         static void Main(string[] args)
         {
-            var result = Problems._5();
+            var start = DateTime.Now;
+            var result = Problems._6();
+            var duration = DateTime.Now - start;
 
-            Console.WriteLine(result);
+            Console.WriteLine("result is: " + result);
+            Console.WriteLine("took {0} seconds to compute", duration.TotalSeconds);
+            Clipboard.SetData(DataFormats.Text, (Object)result); //copy to clipboard
             Console.Read();
-            Clipboard.SetData(DataFormats.Text, (Object)result);
+            
 
         }
     }
